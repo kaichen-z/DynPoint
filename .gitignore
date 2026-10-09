@@ -1,1 +1,7 @@
-legacy/__pycache__/
+__pycache__/
+*.pyc
+data/
+runs/
+*.pt
+*.pth
+*.ply

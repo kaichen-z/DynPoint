@@ -1,0 +1,8 @@
+torch>=2.1
+torchvision>=0.16
+numpy
+opencv-python-headless
+scikit-image
+lpips
+transformers>=4.40        # Depth-Anything-V2 (--depth dav2)
+gdown                     # datasets

@@ -1,0 +1,39 @@
+10:42:34 [cli] preprocess --scene data/nsff_Umbrella --depth dav2 --K 6
+10:42:38 [pre] scene data/nsff_Umbrella: 24 frames 540x286, motion masks: True
+10:42:42 [pre] flow: 330 pairs in 4s
+10:42:50 [pre] depth (dav2) done 12s; raw range 4.879..371.263
+10:42:51 [pre] affine fit per frame (n_px, L1 vs triangulated, median tri depth): 0:22852/2.569/84.33, 3:249628/2.441/78.57, 6:235207/2.396/71.78, 9:224237/2.114/71.06, 12:214144/1.742/77.51, 15:243133/2.043/78.53, 18:220918/2.032/71.18, 21:207938/1.981/70.03
+10:42:51 [pre] fit mode disp: alpha median 0.00003, beta median 0.0061, disparity-mode frames: 24/24
+10:42:51 [pre] world center [-2.269 17.29  71.515], scale 102.750
+10:42:52 [pre] saved data/nsff_Umbrella/work/priors.pt in 14s
+10:42:54 [cli] train_flow --scene data/nsff_Umbrella --K 6 --refine_depth all --sf_wsfmin 1
+10:42:56 [sf] 24 frames with dynamic pixels; MLP step scale 0.0050 (normalised units)
+10:42:57 [sf] it 1/3000 loss 4.0336 flow_px 3.403 depth 0.0122 cycle 0.00000 (2s)
+10:43:09 [sf] it 300/3000 loss 1.4706 flow_px 0.735 depth 0.0184 cycle 0.00003 (14s)
+10:43:23 [sf] it 600/3000 loss 4.4742 flow_px 2.952 depth 0.0376 cycle 0.00002 (28s)
+10:43:39 [sf] it 900/3000 loss 10.0843 flow_px 6.585 depth 0.0630 cycle 0.00002 (43s)
+10:43:55 [sf] it 1200/3000 loss 8.1763 flow_px 6.895 depth 0.0316 cycle 0.00002 (60s)
+10:44:12 [sf] it 1500/3000 loss 2.9970 flow_px 2.319 depth 0.0224 cycle 0.00001 (77s)
+10:44:30 [sf] it 1800/3000 loss 1.5354 flow_px 0.844 depth 0.0280 cycle 0.00001 (94s)
+10:44:47 [sf] it 2100/3000 loss 6.7197 flow_px 5.172 depth 0.0200 cycle 0.00015 (111s)
+10:45:03 [sf] it 2400/3000 loss 5.8343 flow_px 3.710 depth 0.0157 cycle 0.00024 (128s)
+10:45:21 [sf] it 2700/3000 loss 8.6110 flow_px 4.179 depth 0.0136 cycle 0.00053 (145s)
+10:45:37 [sf] it 3000/3000 loss 5.0196 flow_px 2.395 depth 0.0165 cycle 0.00015 (162s)
+10:45:38 [sf] refined depth (all): median scale change 0.988, range 0.834..1.092
+10:45:43 [sf] dynamic-pixel flow error (px): depth-only warp 3.598 -> depth+scene-flow 2.210  (1069946 px)
+10:45:45 [cli] train_render --scene data/nsff_Umbrella --K 6 --attn --p_loo 0.7 --radius_px 6 --nr_iters 20000
+10:45:48 [nr] it 1/20000 loss 0.03037 psnr 15.18 acc 0.844 clouds 1 (1s)
+10:47:11 [nr] it 2000/20000 loss 0.00236 psnr 26.26 acc 0.967 clouds 48 (83s)
+10:48:26 [nr] it 4000/20000 loss 0.00160 psnr 27.95 acc 0.971 clouds 48 (159s)
+10:49:42 [nr] it 6000/20000 loss 0.00127 psnr 28.97 acc 0.942 clouds 48 (234s)
+10:50:57 [nr] it 8000/20000 loss 0.00109 psnr 29.62 acc 0.969 clouds 48 (309s)
+10:52:11 [nr] it 10000/20000 loss 0.00094 psnr 30.27 acc 0.960 clouds 48 (384s)
+10:53:26 [nr] it 12000/20000 loss 0.00136 psnr 28.67 acc 0.966 clouds 48 (459s)
+10:54:41 [nr] it 14000/20000 loss 0.00060 psnr 32.24 acc 0.968 clouds 48 (534s)
+10:55:56 [nr] it 16000/20000 loss 0.00048 psnr 33.17 acc 0.962 clouds 48 (608s)
+10:57:11 [nr] it 18000/20000 loss 0.00043 psnr 33.70 acc 0.971 clouds 48 (684s)
+10:58:27 [nr] it 20000/20000 loss 0.00045 psnr 33.50 acc 0.965 clouds 48 (760s)
+10:58:30 [cli] eval --scene data/nsff_Umbrella --K 6 --attn --p_loo 0.7 --radius_px 6
+11:01:28 [eval] 264 views: PSNR 25.15  SSIM 0.766  LPIPS 0.112
+11:01:31 [cli] video --scene data/nsff_Umbrella --K 6 --attn --p_loo 0.7 --radius_px 6
+11:01:51 [video] wrote data/nsff_Umbrella/work/demo.mp4 (24 frames)
