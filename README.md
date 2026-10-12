@@ -7,7 +7,6 @@ One GPU, no custom CUDA, <b>~19 min per scene</b> (7 min fast setting).
 <a href="https://arxiv.org/abs/2310.18999"><img src="https://img.shields.io/badge/arXiv-2310.18999-b31b1b" alt="arXiv"></a>
 <a href="https://proceedings.neurips.cc/paper_files/paper/2023"><img src="https://img.shields.io/badge/Paper-NeurIPS_2023-blue" alt="Paper"></a>
 <a href="https://dynpoint.github.io/"><img src="https://img.shields.io/badge/Project_Page-green" alt="Project Page"></a>
-<a href="https://github.com/kaichen-z/DynPoint"><img src="https://img.shields.io/badge/Original_Code-stage_1-lightgrey" alt="Original code"></a>
 
 **[University of Oxford](https://www.cs.ox.ac.uk/)**
 
@@ -101,22 +100,7 @@ scene/test/image_%05d_%02d.png   optional held-out views (time, camera id) with 
 
 ## Results
 
-Nvidia Dynamic Scene dataset, NSFF 24-frame monocular split, all 11 held-out rig cameras at every time step (264 views per scene), 540x288, full-image metrics, full setting. The paper evaluates on DynamicNeRF's 12-frame split (no public multi-view ground truth), so the comparison is indicative.
-
-| Scene | PSNR ↑ | SSIM ↑ | LPIPS ↓ | Paper PSNR / LPIPS |
-|---|---|---|---|---|
-| Balloon1-2 | 23.91 | 0.814 | 0.134 | 22.77 / 0.099 |
-| Balloon2-2 | 27.02 | 0.880 | 0.072 | 27.63 / 0.049 |
-| Jumping | 23.53 | 0.804 | 0.167 | 24.69 / 0.097 |
-| Playground | 20.00 | 0.701 | 0.175 | 25.37 / 0.039 |
-| Skating-2 | 27.13 | 0.903 | 0.093 | 31.34 / 0.045 |
-| Truck-2 (`--sf_wsfmin 0`) | 29.70 | 0.894 | 0.065 | 29.30 / 0.061 |
-| Umbrella | 25.15 | 0.766 | 0.111 | 24.59 / 0.086 |
-| **mean** | **25.21** | **0.823** | **0.117** | 26.53 / 0.068 |
-
-Renderer trained with multi-view consistency culling (`--mv_thresh 3`: reference points whose depth + scene-flow re-projection disagrees with the optical flow by more than 3 px are dropped; without it the mean is 25.34 / 0.828 / 0.121 but silhouettes carry more flying points). The demo videos add the inference-time cleanup below (−0.6 dB).
-
-Scene flow (stage 1) lowers the dynamic-pixel re-projection error from 2–11 px (depth only) to 1–5 px on every scene. `results/umbrella/` holds one complete scene-flow and view-synthesis result (`metrics.json`, images, video, log).
+Quantitative results are reported in the tables of the [paper](https://arxiv.org/abs/2310.18999).
 
 ## Differences from the paper
 
