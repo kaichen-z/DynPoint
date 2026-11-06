@@ -86,13 +86,13 @@ def main(argv=None):
         from .preprocess import run
         run(a.scene, work, K=a.K, depth_backend=a.depth, depth_ckpt=a.depth_ckpt, device=a.device, dyn_mode=a.dyn,
             max_frames=a.max_frames, log=log, trust_depth=a.trust_depth)
-    priors = torch.load(pri_path, map_location="cpu", weights_only=False)
+    priors = torch.load(pri_path, map_location="cpu", weights_only=True)
 
     if a.cmd in ("train_flow", "all"):
         from . import sceneflow
         net = sceneflow.train(scene, priors, work, iters=a.sf_iters, lr=a.sf_lr, device=a.device, log=log, w_depth=a.sf_wdepth, refine_depth=a.refine_depth, w_sfmin=a.sf_wsfmin)
         if a.refine_depth:
-            priors = torch.load(pri_path, map_location="cpu", weights_only=False)
+            priors = torch.load(pri_path, map_location="cpu", weights_only=True)
         e0, e1, n = sceneflow.evaluate(scene, priors, net, a.device)
         log(f"[sf] dynamic-pixel flow error (px): depth-only warp {e0:.3f} -> depth+scene-flow {e1:.3f}  ({n} px)")
 
